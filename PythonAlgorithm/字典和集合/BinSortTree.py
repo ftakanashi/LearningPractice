@@ -118,38 +118,49 @@ class DictBinTree:
             bt = bt.right
 
     def delete(self,key):
+        '''
+        删除二叉搜索树中的指定键的键值对
+        :param key:
+        :return:
+        '''
         p,q = None,self._root
         while q is not None and q.data.key != key:
+            # 始终保持p是q的父节点
             p = q
             if key < q.data.key:
                 q = q.left
             else:
                 q = q.right
         if q is None:
+            # 没有找到相应的key，无需删除
             return False
 
+        # 到这里为止，q就是键是key的那个元素。要删除q这个节点，分成两种情况讨论。即q最多只有一个子树和q有两个子树的情况。
+        # 下面以q有无左子树作为条件进行条件的判断。
         if q.left is None:
+            # 没有左子树的情况，只需要考虑q的右子树何去何从
             if p is None:
-                self._root = None
+                self._root = q.right
             if q is p.left:
+                # q本来是p的左子树，将q的右子树作为p的左子树接上
                 p.left = q.right
             elif q is p.right:
+                # q本来是p的右子树，将q的右子树作为p的右子树接上
                 p.right = q.right
 
         else:
+            # q有左子树的情况，
             r = q.left
             while r.right is not None:
+                # 找到q左子树最右下角，即q左子树中最大的位置，将q的右子树作为这个位置的右子树接上
                 r = r.right
             r.right = q.right
 
+            # 这里和上面没有左子树的情况类似了，无非是操作对象由q.right变成q.left。
             if p is None:
                 self._root = q.left
             elif q is p.left:
                 p.left = q.left
             elif q is p.right:
-                p.right = q.right
-
-
-
-
+                p.right = q.left
 

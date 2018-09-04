@@ -8,6 +8,7 @@
 
 def intersect(setA,setB):
     '''
+    两个排好序的集合求交集的函数
     修改部分代码也可以做成求并集或者差集的函数
     保持O(m+n)的复杂度的同时
     :param setA:

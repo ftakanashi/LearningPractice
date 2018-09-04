@@ -3,7 +3,7 @@
 def bin_search(lst,key):
     low,high = 0,len(lst)-1
     while low <= high:
-        mid = low + ( high - low ) // 2
+        mid = low + ( high - low ) // 2  # 这里没有单纯的 (low + high) // 2
         if key == lst[mid].key:
             return lst[mid]
         if key < lst[mid].key:
